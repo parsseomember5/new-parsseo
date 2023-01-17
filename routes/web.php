@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ChaptersController;
 use App\Http\Controllers\Admin\FeedbacksController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\LogosController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Front\IndexController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -97,6 +99,16 @@ Route::prefix('admin')->group(function (){
         Route::get('products/search',[ProductsController::class,'search'])->name('products.search');
         Route::post('products/ajax-delete',[ProductsController::class,'ajaxDelete']);
         Route::resource('products',ProductsController::class);
+
+
+        // tags
+        Route::get('tags/search',[TagsController::class,'search'])->name('tags.search');
+        Route::resource('tags',TagsController::class);
+
+        // chapters
+        Route::get('chapters/search',[ChaptersController::class,'search'])->name('chapters.search');
+        Route::post('chapters/parents',[ChaptersController::class,'getParents'])->name('chapters.parents');
+        Route::resource('chapters',ChaptersController::class);
 
         // post categories
         Route::get('post-categories/search',[PostCategoriesController::class,'search'])->name('post-categories.search');

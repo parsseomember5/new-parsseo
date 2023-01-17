@@ -90,20 +90,15 @@ class Product extends Model implements Viewable
         return $this->belongsTo(Admin::class,'admin_id');
     }
 
-    public function supports()
+    /*public function supports()
     {
         return $this->hasMany(Support::class);
-    }
-
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'tag_able', 'tag_ables')->using(TagAble::class);
     }
 
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status', true);
-    }
+    }*/
 
     public function modal()
     {
@@ -112,7 +107,12 @@ class Product extends Model implements Viewable
 
     public function chapters()
     {
-        return $this->hasMany(Chapter::class);
+        return $this->hasMany(Chapter::class)->whereNotNull('parent_id');
+    }
+
+    public function headlines()
+    {
+        return $this->hasMany(Chapter::class)->whereNull('parent_id');
     }
 
     public function recommendeds()
@@ -120,7 +120,7 @@ class Product extends Model implements Viewable
         return $this->belongsToMany(Product::class, 'product_recommended', 'product_id', 'recommended_id');
     }
 
-    public function factorItems()
+    /*public function factorItems()
     {
         return $this->hasMany(Factoritem::class);
     }
@@ -132,17 +132,10 @@ class Product extends Model implements Viewable
         });
     }
 
-    public function recordUserTag()
-    {
-        if (auth()->check() && $this->tags->count()>0) {
-            auth()->user()->update(['tag_id' => $this->tags()->first()->id]);
-        }
-    }
-
     public function learnings()
     {
         return $this->hasMany(Learning::class);
-    }
+    }*/
 
     public function getImage($size = 'original'){
 

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CreatePostRequest;
 use App\Http\Requests\Admin\CreateProductRequest;
 use App\Http\Requests\Admin\UpdateProductRequest;
-use App\Models\Post;
 use App\Models\Product;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -34,7 +32,6 @@ class ProductsController extends Controller
     public function store(CreateProductRequest $request)
     {
         $inputs = $request->all();
-        unset($inputs['keywords']);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -88,15 +85,9 @@ class ProductsController extends Controller
 
         $product = Product::create($inputs);
 
-        // attach categories
+        // attach tags
         if (!empty($request->tags)){
-            $product->tags()->attach($request->tags);
-        }
-
-        // attach keywords
-        if (!empty($request->keywords)){
-            $keys = explode(',',$request->keywords);
-            $product->attachTags($keys);
+            $product->attachTags($request->tags);
         }
 
         // update translation
@@ -120,7 +111,6 @@ class ProductsController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $inputs = $request->all();
-        unset($inputs['keywords']);
 
         // update slug
         if ($request->slug != $product->slug){
@@ -185,13 +175,9 @@ class ProductsController extends Controller
 
         $product->update($inputs);
 
-        // sync categories
-        $product->tags()->sync($request->tags);
-
-        // sync keywords
-        if (!empty($request->keywords)){
-            $keys = explode(',',$request->keywords);
-            $product->syncTags($keys);
+        // attach tags
+        if (!empty($request->tags)){
+            $product->syncTags($request->tags);
         }
 
         // update translation model

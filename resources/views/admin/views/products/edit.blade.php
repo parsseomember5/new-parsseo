@@ -108,9 +108,9 @@
                         <div class="mb-3 col-lg-6">
                             <label class="form-label" for="tags">تگ ها</label>
                             <select class="form-select select2 select2-show-search" id="tags" multiple name="tags[]" data-allow-clear="true">
-                                @foreach(\App\Models\Tag::all() as $item)
+                                @foreach(\Spatie\Tags\Tag::all() as $item)
                                     <option value="{{ $item->id }}" {{ in_array($item->id,$product->tags->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                        {{ $item->fa_title }}
+                                        {{ $item->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -247,13 +247,6 @@
                                 @endforeach
                             @endif
                         </select>
-                    </div>
-
-                    {{-- keywords --}}
-                    <div class="mb-3">
-                        <label for="keywords" class="form-label">کلمات کلیدی</label>
-                        <input id="keywords" class="form-control tagify-select" name="keywords" value="{{old('keywords',$product->tags->pluck('name'))}}">
-                        <small class="d-block text-muted mt-1">کلمه را بنوسید و سپس اینتر بزنید</small>
                     </div>
 
                     <div class="row">

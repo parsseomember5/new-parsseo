@@ -118,26 +118,46 @@
                         <div data-i18n="List">افزودن مورد جدید</div>
                     </a>
                 </li>
+            </ul>
+        </li>
 
-                {{--
-                <li class="menu-item {{str_starts_with($currentRoute,"post-categories") ? 'active' :''}}">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <div data-i18n="View">دسته بندی ها</div>
+        {{-- chapters --}}
+        <li class="menu-item {{str_starts_with($currentRoute,'chapters') ? 'active' :''}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-videos"></i>
+                <div data-i18n="Users">سرفصل ها</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{$currentRoute == "chapters.index" ? 'active' :''}}">
+                    <a href="{{route('chapters.index')}}" class="menu-link">
+                        <div data-i18n="List">مشاهده همه</div>
                     </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item {{$currentRoute == "post-categories.index" ? 'active' :''}}">
-                            <a href="{{route('post-categories.index')}}" class="menu-link">
-                                <div data-i18n="Account">مشاهده همه</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{$currentRoute == "post-categories.create" ? 'active' :''}}">
-                            <a href="{{route('post-categories.create')}}" class="menu-link">
-                                <div data-i18n="Security">افزودن مورد جدید</div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
-                --}}
+                <li class="menu-item {{$currentRoute == "chapters.create" ? 'active' :''}}">
+                    <a href="{{route('chapters.create')}}" class="menu-link">
+                        <div data-i18n="List">افزودن مورد جدید</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- tags --}}
+        <li class="menu-item {{str_starts_with($currentRoute,'tags') ? 'active' :''}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-tag"></i>
+                <div data-i18n="Users">تگ ها</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{$currentRoute == "tags.index" ? 'active' :''}}">
+                    <a href="{{route('tags.index')}}" class="menu-link">
+                        <div data-i18n="List">مشاهده همه</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "tags.create" ? 'active' :''}}">
+                    <a href="{{route('tags.create')}}" class="menu-link">
+                        <div data-i18n="List">افزودن مورد جدید</div>
+                    </a>
+                </li>
             </ul>
         </li>
 
