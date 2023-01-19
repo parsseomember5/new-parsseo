@@ -9,6 +9,7 @@ use App\Models\CounterBoxSetting;
 use App\Models\EventsSetting;
 use App\Models\FeaturesSetting;
 use App\Models\FeedbacksSetting;
+use App\Models\GatewaySetting;
 use App\Models\GeneralSetting;
 use App\Models\HeroSetting;
 use App\Models\LandingAboutUs;
@@ -25,6 +26,11 @@ class SettingsController extends Controller
         if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
         $settings = GeneralSetting::where('locale',$locale)->first();
         return view('admin.views.settings.general',compact('settings'));
+    }
+
+    public function gateways(){
+        $settings = GatewaySetting::first();
+        return view('admin.views.settings.gateways',compact('settings'));
     }
 
     public function hero(){
@@ -81,30 +87,12 @@ class SettingsController extends Controller
         return view('admin.views.settings.contact_us',compact('settings'));
     }
 
-    public function aboutUs(){
+    public function aboutUs()
+    {
         if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
-        $settings = LandingAboutUs::where('locale',$locale)->first();
-        return view('admin.views.settings.about_us',compact('settings'));
+        $settings = LandingAboutUs::where('locale', $locale)->first();
+        return view('admin.views.settings.about_us', compact('settings'));
     }
-
-    public function seo(){
-        if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
-        $settings = LandingSeo::where('locale',$locale)->first();
-        return view('admin.views.settings.seo',compact('settings'));
-    }
-
-    public function webDesign(){
-        if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
-        $settings = LandingWebdesign::where('locale',$locale)->first();
-        return view('admin.views.settings.web_design',compact('settings'));
-    }
-
-    public function appDesign(){
-        if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
-        $settings = LandingAppdesign::where('locale',$locale)->first();
-        return view('admin.views.settings.app_design',compact('settings'));
-    }
-
 
     public function updateGeneral(Request $request){
         $request->validate([
@@ -556,221 +544,13 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    public function updateSeo(Request $request){
+    public function updateGateways(Request $request){
         $request->validate([
-            'nav_title' => 'required|string|max:255',
-            'cta_image'  =>  'nullable|mimes:jpeg,jpg,png,gif',
-            'cta_uptitle' => 'nullable|string|max:255',
-            'cta_title' => 'nullable|string|max:255',
-            'cta_text' => 'nullable|string|max:2048',
-            'cta_btn1_text' => 'nullable|string|max:255',
-            'cta_btn1_icon' => 'nullable|string|max:255',
-            'cta_btn1_link' => 'nullable|string|max:255',
-            'cta_btn2_text' => 'nullable|string|max:255',
-            'cta_btn2_icon' => 'nullable|string|max:255',
-            'cta_btn2_link' => 'nullable|string|max:255',
-            'video'   =>  'nullable|mimes:mp4,mov,ogg,qt|max:50000',
-            'video_poster' => 'nullable|mimes:jpeg,jpg,png,gif',
-            'faq_title' => 'nullable|string|max:255',
-            'faq',
-            'summary' => 'nullable|string|max:1024',
-            'article_btn_text' => 'nullable|string|max:255',
-            'article_btn_icon' => 'nullable|string|max:255',
-            'article_btn_link' => 'nullable|string|max:255',
+            'description'  =>  'required|string|max:500',
+            'zarinpal_merchant' => 'nullable|string|max:190',
         ]);
-        $inputs = request()->all();
-        if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
 
-        // faq
-        $faq = array();
-        foreach ($inputs as $key => $input) {
-            if (str_starts_with($key, 'item_faq_')) {
-                array_push($faq,$input);
-            }
-        }
-        $inputs['faq'] = $faq;
-
-        // cta image
-        if ($request->remove_cta_image != null) {
-            $fileUrl = request('remove_cta_image');
-            $this->removeStorageFile($fileUrl);
-            $inputs['cta_image'] = null;
-        }
-        if ($request->hasFile('cta_image')) {
-            $imageFile = $request->file('cta_image');
-            $inputs['cta_image'] = $this->uploadRealFile($imageFile,'settings');
-        }
-
-        // video poster
-        if ($request->remove_video_poster != null) {
-            $fileUrl = request('remove_video_poster');
-            $this->removeStorageFile($fileUrl);
-            $inputs['video_poster'] = null;
-        }
-        if ($request->hasFile('video_poster')) {
-            $imageFile = $request->file('video_poster');
-            $inputs['video_poster'] = $this->uploadRealFile($imageFile,'settings');
-        }
-
-        // upload video
-        if ($request->remove_video != null) {
-            $fileUrl = request('remove_video');
-            $this->removeStorageFile($fileUrl);
-            $inputs['video'] = null;
-        }
-        if ($request->hasFile('video')) {
-            $videoFile = $request->file('video');
-            $inputs['video'] = $this->uploadRealFile($videoFile,'settings');
-        }
-
-        $settings= LandingSeo::where('locale',$locale)->first();
-        $settings->update($inputs);
-        session()->flash('success','تغییرات با موفقیت ذخیره شد.');
-        return redirect()->back();
-    }
-
-    public function webDesignUpdate(Request $request){
-        $request->validate([
-            'nav_title' => 'required|string|max:255',
-            'cta_image'  =>  'nullable|mimes:jpeg,jpg,png,gif',
-            'cta_uptitle' => 'nullable|string|max:255',
-            'cta_title' => 'nullable|string|max:255',
-            'cta_text' => 'nullable|string|max:2048',
-            'cta_btn1_text' => 'nullable|string|max:255',
-            'cta_btn1_icon' => 'nullable|string|max:255',
-            'cta_btn1_link' => 'nullable|string|max:255',
-            'cta_btn2_text' => 'nullable|string|max:255',
-            'cta_btn2_icon' => 'nullable|string|max:255',
-            'cta_btn2_link' => 'nullable|string|max:255',
-            'video'   =>  'nullable|mimes:mp4,mov,ogg,qt|max:50000',
-            'video_poster' => 'nullable|mimes:jpeg,jpg,png,gif',
-            'faq_title' => 'nullable|string|max:255',
-            'faq',
-            'summary' => 'nullable|string|max:1024',
-            'article_btn_text' => 'nullable|string|max:255',
-            'article_btn_icon' => 'nullable|string|max:255',
-            'article_btn_link' => 'nullable|string|max:255',
-        ]);
-        $inputs = request()->all();
-        if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
-
-        // faq
-        $faq = array();
-        foreach ($inputs as $key => $input) {
-            if (str_starts_with($key, 'item_faq_')) {
-                array_push($faq,$input);
-            }
-        }
-        $inputs['faq'] = $faq;
-
-        // cta image
-        if ($request->remove_cta_image != null) {
-            $fileUrl = request('remove_cta_image');
-            $this->removeStorageFile($fileUrl);
-            $inputs['cta_image'] = null;
-        }
-        if ($request->hasFile('cta_image')) {
-            $imageFile = $request->file('cta_image');
-            $inputs['cta_image'] = $this->uploadRealFile($imageFile,'settings');
-        }
-
-        // video poster
-        if ($request->remove_video_poster != null) {
-            $fileUrl = request('remove_video_poster');
-            $this->removeStorageFile($fileUrl);
-            $inputs['video_poster'] = null;
-        }
-        if ($request->hasFile('video_poster')) {
-            $imageFile = $request->file('video_poster');
-            $inputs['video_poster'] = $this->uploadRealFile($imageFile,'settings');
-        }
-
-        // upload video
-        if ($request->remove_video != null) {
-            $fileUrl = request('remove_video');
-            $this->removeStorageFile($fileUrl);
-            $inputs['video'] = null;
-        }
-        if ($request->hasFile('video')) {
-            $videoFile = $request->file('video');
-            $inputs['video'] = $this->uploadRealFile($videoFile,'settings');
-        }
-
-        $settings= LandingWebdesign::where('locale',$locale)->first();
-        $settings->update($inputs);
-        session()->flash('success','تغییرات با موفقیت ذخیره شد.');
-        return redirect()->back();
-    }
-
-    public function appDesignUpdate(Request $request){
-        $request->validate([
-            'nav_title' => 'required|string|max:255',
-            'cta_image'  =>  'nullable|mimes:jpeg,jpg,png,gif',
-            'cta_uptitle' => 'nullable|string|max:255',
-            'cta_title' => 'nullable|string|max:255',
-            'cta_text' => 'nullable|string|max:2048',
-            'cta_btn1_text' => 'nullable|string|max:255',
-            'cta_btn1_icon' => 'nullable|string|max:255',
-            'cta_btn1_link' => 'nullable|string|max:255',
-            'cta_btn2_text' => 'nullable|string|max:255',
-            'cta_btn2_icon' => 'nullable|string|max:255',
-            'cta_btn2_link' => 'nullable|string|max:255',
-            'video'   =>  'nullable|mimes:mp4,mov,ogg,qt|max:50000',
-            'video_poster' => 'nullable|mimes:jpeg,jpg,png,gif',
-            'faq_title' => 'nullable|string|max:255',
-            'faq',
-            'summary' => 'nullable|string|max:1024',
-            'article_btn_text' => 'nullable|string|max:255',
-            'article_btn_icon' => 'nullable|string|max:255',
-            'article_btn_link' => 'nullable|string|max:255',
-        ]);
-        $inputs = request()->all();
-        if (session()->has('locale')) $locale = session('locale'); else $locale = 'fa';
-
-        // faq
-        $faq = array();
-        foreach ($inputs as $key => $input) {
-            if (str_starts_with($key, 'item_faq_')) {
-                array_push($faq,$input);
-            }
-        }
-        $inputs['faq'] = $faq;
-
-        // cta image
-        if ($request->remove_cta_image != null) {
-            $fileUrl = request('remove_cta_image');
-            $this->removeStorageFile($fileUrl);
-            $inputs['cta_image'] = null;
-        }
-        if ($request->hasFile('cta_image')) {
-            $imageFile = $request->file('cta_image');
-            $inputs['cta_image'] = $this->uploadRealFile($imageFile,'settings');
-        }
-
-        // video poster
-        if ($request->remove_video_poster != null) {
-            $fileUrl = request('remove_video_poster');
-            $this->removeStorageFile($fileUrl);
-            $inputs['video_poster'] = null;
-        }
-        if ($request->hasFile('video_poster')) {
-            $imageFile = $request->file('video_poster');
-            $inputs['video_poster'] = $this->uploadRealFile($imageFile,'settings');
-        }
-
-        // upload video
-        if ($request->remove_video != null) {
-            $fileUrl = request('remove_video');
-            $this->removeStorageFile($fileUrl);
-            $inputs['video'] = null;
-        }
-        if ($request->hasFile('video')) {
-            $videoFile = $request->file('video');
-            $inputs['video'] = $this->uploadRealFile($videoFile,'settings');
-        }
-
-        $settings= LandingAppdesign::where('locale',$locale)->first();
-        $settings->update($inputs);
+        GatewaySetting::first()->update($request->all());
         session()->flash('success','تغییرات با موفقیت ذخیره شد.');
         return redirect()->back();
     }

@@ -1,13 +1,20 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminsController;
+use App\Http\Controllers\Admin\CartsController;
 use App\Http\Controllers\Admin\ChaptersController;
+use App\Http\Controllers\Admin\CommentsController;
+use App\Http\Controllers\Admin\DiscountsController;
 use App\Http\Controllers\Admin\FeedbacksController;
+use App\Http\Controllers\Admin\LearningsController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\LogosController;
 use App\Http\Controllers\Admin\MenuItemsController;
 use App\Http\Controllers\Admin\MenusController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\PortfolioCategoriesController;
 use App\Http\Controllers\Admin\PortfoliosController;
 use App\Http\Controllers\Admin\PostCategoriesController;
@@ -16,6 +23,8 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\TicketsController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Front\IndexController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -89,6 +98,58 @@ Route::prefix('admin')->group(function (){
         Route::resource('posts',PostsController::class);
         Route::post('posts/ajax-delete',[PostsController::class,'ajaxDelete']);
 
+        // users
+        Route::get('users/wallet/{user}',[UsersController::class,'showWallet'])->name('users.wallet');
+        Route::get('users/cart/{user}',[UsersController::class,'showCart'])->name('users.cart');
+        Route::post('users/get-balance',[UsersController::class,'getBalance']);
+        Route::get('users/balance/{user?}',[UsersController::class,'balance'])->name('users.balance');
+        Route::post('users/balance-update',[UsersController::class,'updateBalance'])->name('users.balance_update');
+        Route::get('users/trash',[UsersController::class,'trash'])->name('users.trash');
+        Route::post('users/empty/trash',[UsersController::class,'emptyTrash'])->name('users.trash.empty');
+        Route::post('users/restore/{id}',[UsersController::class,'restore'])->name('users.restore');
+        Route::post('users/force-delete',[UsersController::class,'forceDelete'])->name('users.delete.force');
+        Route::get('users/search/trash',[UsersController::class,'searchTrash'])->name('users.search.trash');
+        Route::get('users/search',[UsersController::class,'search'])->name('users.search');
+        Route::resource('users',UsersController::class);
+        Route::post('users/ajax-delete',[UsersController::class,'ajaxDelete']);
+
+        // tickets
+        Route::get('tickets/trash',[TicketsController::class,'trash'])->name('tickets.trash');
+        Route::post('tickets/empty/trash',[TicketsController::class,'emptyTrash'])->name('tickets.trash.empty');
+        Route::post('tickets/restore/{id}',[TicketsController::class,'restore'])->name('tickets.restore');
+        Route::post('tickets/force-delete',[TicketsController::class,'forceDelete'])->name('tickets.delete.force');
+        Route::get('tickets/search/trash',[TicketsController::class,'searchTrash'])->name('tickets.search.trash');
+        Route::get('tickets/search',[TicketsController::class,'search'])->name('tickets.search');
+        Route::resource('tickets',TicketsController::class);
+        Route::post('tickets/ajax-delete',[TicketsController::class,'ajaxDelete']);
+
+        // comments
+        Route::get('comments/search',[CommentsController::class,'search'])->name('comments.search');
+        Route::resource('comments',CommentsController::class);
+
+        // discounts
+        Route::get('discounts/trash',[DiscountsController::class,'trash'])->name('discounts.trash');
+        Route::post('discounts/empty/trash',[DiscountsController::class,'emptyTrash'])->name('discounts.trash.empty');
+        Route::post('discounts/restore/{id}',[DiscountsController::class,'restore'])->name('discounts.restore');
+        Route::post('discounts/force-delete',[DiscountsController::class,'forceDelete'])->name('discounts.delete.force');
+        Route::get('discounts/search/trash',[DiscountsController::class,'searchTrash'])->name('discounts.search.trash');
+        Route::get('discounts/search',[DiscountsController::class,'search'])->name('discounts.search');
+        Route::resource('discounts',DiscountsController::class);
+        Route::post('discounts/ajax-delete',[DiscountsController::class,'ajaxDelete']);
+
+        // payments
+        Route::get('payments',[PaymentsController::class,'index'])->name('payments.index');
+        Route::post('payments/search',[PaymentsController::class,'search'])->name('payments.search');
+
+        // admins
+        Route::get('admins/trash',[AdminsController::class,'trash'])->name('admins.trash');
+        Route::post('admins/empty/trash',[AdminsController::class,'emptyTrash'])->name('admins.trash.empty');
+        Route::post('admins/restore/{id}',[AdminsController::class,'restore'])->name('admins.restore');
+        Route::post('admins/force-delete',[AdminsController::class,'forceDelete'])->name('admins.delete.force');
+        Route::get('admins/search/trash',[AdminsController::class,'searchTrash'])->name('admins.search.trash');
+        Route::get('admins/search',[AdminsController::class,'search'])->name('admins.search');
+        Route::resource('admins',AdminsController::class);
+        Route::post('admins/ajax-delete',[AdminsController::class,'ajaxDelete']);
 
         // product
         Route::get('products/trash',[ProductsController::class,'trash'])->name('products.trash');
@@ -99,7 +160,6 @@ Route::prefix('admin')->group(function (){
         Route::get('products/search',[ProductsController::class,'search'])->name('products.search');
         Route::post('products/ajax-delete',[ProductsController::class,'ajaxDelete']);
         Route::resource('products',ProductsController::class);
-
 
         // tags
         Route::get('tags/search',[TagsController::class,'search'])->name('tags.search');
@@ -125,6 +185,16 @@ Route::prefix('admin')->group(function (){
         Route::resource('portfolios',PortfoliosController::class);
         Route::post('portfolios/ajax-delete',[PortfoliosController::class,'ajaxDelete']);
 
+        // orders
+        Route::get('orders/trash',[OrdersController::class,'trash'])->name('orders.trash');
+        Route::post('orders/empty/trash',[OrdersController::class,'emptyTrash'])->name('orders.trash.empty');
+        Route::post('orders/restore/{id}',[OrdersController::class,'restore'])->name('orders.restore');
+        Route::post('orders/force-delete',[OrdersController::class,'forceDelete'])->name('orders.delete.force');
+        Route::get('orders/search/trash',[OrdersController::class,'searchTrash'])->name('orders.search.trash');
+        Route::get('orders/search',[OrdersController::class,'search'])->name('orders.search');
+        Route::resource('orders',OrdersController::class);
+        Route::post('orders/ajax-delete',[OrdersController::class,'ajaxDelete']);
+
         // portfolio categories
         Route::get('portfolio-categories/search',[PortfolioCategoriesController::class,'search'])->name('portfolio-categories.search');
         Route::resource('portfolio-categories',PortfolioCategoriesController::class);
@@ -143,6 +213,8 @@ Route::prefix('admin')->group(function (){
         Route::prefix('settings')->group(function (){
             Route::get('general',[SettingsController::class,'general'])->name('settings.general');
             Route::post('general/update',[SettingsController::class,'updateGeneral'])->name('settings.general_update');
+            Route::get('gateways',[SettingsController::class,'gateways'])->name('settings.gateways');
+            Route::post('gateways/update',[SettingsController::class,'updateGateways'])->name('settings.gateways_update');
             Route::get('portfolios',[SettingsController::class,'portfolios'])->name('settings.portfolios');
             Route::post('portfolios/update',[SettingsController::class,'updatePortfolios'])->name('settings.portfolios_update');
             Route::get('features',[SettingsController::class,'features'])->name('settings.features');
@@ -181,6 +253,10 @@ Route::prefix('admin')->group(function (){
         Route::get('logos/search',[LogosController::class,'search'])->name('logos.search');
         Route::resource('logos',LogosController::class);
 
+        // learnings
+        Route::get('learnings/search',[LearningsController::class,'search'])->name('learnings.search');
+        Route::resource('learnings',LearningsController::class);
+
         // menus
         Route::get('menus/search',[MenusController::class,'search'])->name('menus.search');
         Route::post('menus/get-items',[MenuItemsController::class,'getItems']);
@@ -202,9 +278,6 @@ Route::prefix('admin')->group(function (){
 Route::get('/',[IndexController::class,'home'])->name('home');
 Route::get('/contact-us/',[IndexController::class,'contactUs'])->name('contact_us');
 Route::get('/about-us/',[IndexController::class,'aboutUs'])->name('about_us');
-Route::get('/seo/',[IndexController::class,'seo'])->name('seo');
-Route::get('/web-design/',[IndexController::class,'webDesign'])->name('web_design');
-Route::get('/app-design/',[IndexController::class,'appDesign'])->name('app_design');
 Route::get('/article/{post}/',[IndexController::class,'article'])->name('post.show');
 Route::get('/articles/',[IndexController::class,'articles'])->name('posts');
 Route::get('/portfolio/{portfolio}/',[IndexController::class,'portfolio'])->name('portfolio.show');

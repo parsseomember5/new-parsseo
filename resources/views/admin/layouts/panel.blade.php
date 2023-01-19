@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>صفحه 1 - کیت شروع | فرست - قالب مدیریت بوت‌استرپ</title>
+    <title>پنل مدیریت - @yield('title')</title>
 
     <meta name="description" content="">
 
@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{asset('admin/assets/vendor/libs/tagify/tagify.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/vendor/libs/quill/typography.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/vendor/libs/quill/editor.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/vendor/libs/flatpickr/flatpickr.css')}}">
 
     <!-- Page CSS -->
     @yield('styles')
@@ -99,6 +100,8 @@
 <script src="{{asset('admin/assets/vendor/libs/tagify/tagify.js')}}"></script>
 <script src="{{asset('admin/assets/vendor/libs/quill/katex.js')}}"></script>
 <script src="{{asset('admin/assets/vendor/libs/quill/quill.js')}}"></script>
+<script src="{{asset('admin/assets/vendor/libs/jdate/jdate.js')}}"></script>
+<script src="{{asset('admin/assets/vendor/libs/flatpickr/flatpickr-jdate.js')}}"></script>
 
 <!-- Main JS -->
 <script src="{{asset('admin/assets/js/main.js')}}"></script>

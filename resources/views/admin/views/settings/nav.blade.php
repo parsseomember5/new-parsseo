@@ -6,6 +6,10 @@
             عمومی</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {{$currentRoute == "settings.gateways" ? 'active' :''}}" href="{{route('settings.gateways')}}"><i class="bx bx-cog me-1"></i>
+            درگاه پرداخت</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{$currentRoute == "settings.hero" ? 'active' :''}}" href="{{route('settings.hero')}}"><i class="bx bx-layout me-1"></i> هیرو</a>
     </li>
     <li class="nav-item">
@@ -39,15 +43,4 @@
     <li class="nav-item">
         <a class="nav-link {{$currentRoute == "settings.about_us" ? 'active' :''}}" href="{{route('settings.about_us')}}"><i class="bx bx-info-circle me-1"></i> لندینگ درباره ما</a>
     </li>
-
-    <li class="nav-item">
-        <a class="nav-link {{$currentRoute == "settings.seo" ? 'active' :''}}" href="{{route('settings.seo')}}"><i class="bx bx-chart me-1"></i> لندینگ سئو</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link {{$currentRoute == "settings.webdesign" ? 'active' :''}}" href="{{route('settings.webdesign')}}"><i class="bx bx-brush me-1"></i> لندینگ طراحی سایت</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link {{$currentRoute == "settings.appdesign" ? 'active' :''}}" href="{{route('settings.appdesign')}}"><i class="bx bx-mobile me-1"></i> لندینگ طراحی اپ</a>
-    </li>
-
 </ul>

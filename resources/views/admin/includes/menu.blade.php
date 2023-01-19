@@ -26,6 +26,81 @@
             </a>
         </li>
 
+        {{-- admins --}}
+        <li class="menu-item {{str_starts_with($currentRoute,'admins.') ? 'active' :''}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-user-detail"></i>
+                <div data-i18n="Invoice">مدیریت ادمین ها</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{$currentRoute == "admins.index" ? 'active' :''}}">
+                    <a href="{{route('admins.index')}}" class="menu-link">
+                        <div data-i18n="List">مشاهده همه</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "admins.trash" ? 'active' :''}}">
+                    <a href="{{route('admins.trash')}}" class="menu-link">
+                        <div data-i18n="List">زباله‌دان</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "admins.create" ? 'active' :''}}">
+                    <a href="{{route('admins.create')}}" class="menu-link">
+                        <div data-i18n="Preview">افزودن مورد جدید</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- users --}}
+        <li class="menu-item {{str_starts_with($currentRoute,'users.') ? 'active' :''}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-user-detail"></i>
+                <div data-i18n="Invoice">مدیریت کاربران</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{$currentRoute == "users.index" ? 'active' :''}}">
+                    <a href="{{route('users.index')}}" class="menu-link">
+                        <div data-i18n="List">مشاهده همه</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "users.trash" ? 'active' :''}}">
+                    <a href="{{route('users.trash')}}" class="menu-link">
+                        <div data-i18n="List">زباله‌دان</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "users.create" ? 'active' :''}}">
+                    <a href="{{route('users.create')}}" class="menu-link">
+                        <div data-i18n="Preview">افزودن مورد جدید</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- orders --}}
+        <li class="menu-item {{str_starts_with($currentRoute,'orders.') ? 'active' :''}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-factory"></i>
+                <div data-i18n="Invoice">سفارشات</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{$currentRoute == "orders.index" ? 'active' :''}}">
+                    <a href="{{route('orders.index')}}" class="menu-link">
+                        <div data-i18n="List">مشاهده همه</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "orders.trash" ? 'active' :''}}">
+                    <a href="{{route('orders.trash')}}" class="menu-link">
+                        <div data-i18n="List">زباله‌دان</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "orders.create" ? 'active' :''}}">
+                    <a href="{{route('orders.create')}}" class="menu-link">
+                        <div data-i18n="Preview">افزودن مورد جدید</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         {{-- profile --}}
         <li class="menu-item {{str_starts_with($currentRoute,'admin.profile') ? 'active' :''}}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -51,6 +126,38 @@
             <a href="{{route('contacts.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-contact"></i>
                 <div data-i18n="Page 1">درخواست های تماس</div>
+            </a>
+        </li>
+
+        {{-- tickets --}}
+        <li class="menu-item {{$currentRoute == "tickets.index" ? 'active' :''}}">
+            <a href="{{route('tickets.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-alarm"></i>
+                <div data-i18n="Page 1">تیکت ها</div>
+            </a>
+        </li>
+
+        {{-- comments --}}
+        <li class="menu-item {{$currentRoute == "comments.index" ? 'active' :''}}">
+            <a href="{{route('comments.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-comment"></i>
+                <div data-i18n="Page 1">کامنت ها</div>
+            </a>
+        </li>
+
+        {{-- wallet balance --}}
+        <li class="menu-item {{$currentRoute == "users.balance" ? 'active' :''}}">
+            <a href="{{route('users.balance')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-wallet"></i>
+                <div data-i18n="Page 1">ویرایش موجودی کاربران</div>
+            </a>
+        </li>
+
+        {{-- payments --}}
+        <li class="menu-item {{$currentRoute == "payments.index" ? 'active' :''}}">
+            <a href="{{route('payments.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-credit-card"></i>
+                <div data-i18n="Page 1">پرداخت ها</div>
             </a>
         </li>
 
@@ -141,6 +248,31 @@
             </ul>
         </li>
 
+        {{-- discounts --}}
+        <li class="menu-item {{str_starts_with($currentRoute,'discounts.') ? 'active' :''}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-gift"></i>
+                <div data-i18n="Invoice">کد های تخفیف</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{$currentRoute == "discounts.index" ? 'active' :''}}">
+                    <a href="{{route('discounts.index')}}" class="menu-link">
+                        <div data-i18n="List">مشاهده همه</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "discounts.trash" ? 'active' :''}}">
+                    <a href="{{route('discounts.trash')}}" class="menu-link">
+                        <div data-i18n="List">زباله‌دان</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "discounts.create" ? 'active' :''}}">
+                    <a href="{{route('discounts.create')}}" class="menu-link">
+                        <div data-i18n="Preview">افزودن مورد جدید</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         {{-- tags --}}
         <li class="menu-item {{str_starts_with($currentRoute,'tags') ? 'active' :''}}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -155,6 +287,26 @@
                 </li>
                 <li class="menu-item {{$currentRoute == "tags.create" ? 'active' :''}}">
                     <a href="{{route('tags.create')}}" class="menu-link">
+                        <div data-i18n="List">افزودن مورد جدید</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- learnings --}}
+        <li class="menu-item {{str_starts_with($currentRoute,'learnings') ? 'active' :''}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-user-account"></i>
+                <div data-i18n="Users">دسترسی کاربر به محصول</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{$currentRoute == "learnings.index" ? 'active' :''}}">
+                    <a href="{{route('learnings.index')}}" class="menu-link">
+                        <div data-i18n="List">مشاهده همه</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "learnings.create" ? 'active' :''}}">
+                    <a href="{{route('learnings.create')}}" class="menu-link">
                         <div data-i18n="List">افزودن مورد جدید</div>
                     </a>
                 </li>
@@ -317,6 +469,11 @@
                 <li class="menu-item {{$currentRoute == "settings.general" ? 'active' :''}}">
                     <a href="{{route('settings.general')}}" class="menu-link">
                         <div data-i18n="List">عمومی</div>
+                    </a>
+                </li>
+                <li class="menu-item {{$currentRoute == "settings.gateways" ? 'active' :''}}">
+                    <a href="{{route('settings.gateways')}}" class="menu-link">
+                        <div data-i18n="List">درگاه پرداخت</div>
                     </a>
                 </li>
                 <li class="menu-item {{$currentRoute == "settings.hero" ? 'active' :''}}">

@@ -157,19 +157,4 @@ class IndexController extends Controller
         $landing = LandingAboutUs::first();
         return view('front.about_us',compact('landing'));
     }
-
-    public function seo(){
-        $landing = LandingSeo::first();
-        return view('front.seo',compact('landing'));
-    }
-
-    public function appDesign(){
-        $landing = LandingAppdesign::first();
-        return view('front.app_design',compact('landing'));
-    }
-
-    public function webDesign(){
-        $landing = LandingWebdesign::first();
-        return view('front.web_design',compact('landing'));
-    }
 }

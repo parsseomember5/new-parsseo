@@ -117,6 +117,15 @@ class ProductsController extends Controller
             $inputs['slug'] = SlugService::createSlug(Product::class, 'slug', str_replace('/','',$request->slug));
         }
 
+        // faq
+        $faq = array();
+        foreach ($inputs as $key => $input) {
+            if (str_starts_with($key, 'item_faq_')) {
+                array_push($faq,$input);
+                unset($inputs[$key]);
+            }
+        }
+        $inputs['faq'] = $faq;
 
         // image
         if ($request->remove_image != null) {
@@ -227,6 +236,10 @@ class ProductsController extends Controller
         $product->update(['translation_id' => null]);
         $product->tags()->sync([]);
         $product->chapters()->delete();
+        $product->headlines()->delete();
+        $product->learnings()->delete();
+        $product->modal()->delete();
+        $product->comments()->delete();
         $product->forceDelete();
         if (isset($imageORG)){
             $this->removeStorageFile($imageTHUMB);

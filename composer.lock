@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94b87ecc6dd4a0b2de14a4a88e6d6c99",
+    "content-hash": "66881f098d21618ea75c9666e865b5c6",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2403,6 +2403,81 @@
             "time": "2022-04-17T13:12:02+00:00"
         },
         {
+            "name": "mannikj/laravel-wallet",
+            "version": "v7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MannikJ/laravel-wallet.git",
+                "reference": "d2b30f28593319acfe5e91e6876314e72bfefb39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MannikJ/laravel-wallet/zipball/d2b30f28593319acfe5e91e6876314e72bfefb39",
+                "reference": "d2b30f28593319acfe5e91e6876314e72bfefb39",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^3.0",
+                "nunomaduro/larastan": "^1.0",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MannikJ\\Laravel\\Wallet\\WalletServiceProvider"
+                    ],
+                    "aliases": {
+                        "Wallet": "MannikJ\\Laravel\\Wallet\\Facades\\WalletFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MannikJ\\Laravel\\Wallet\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jannik Malken",
+                    "email": "mannikj@web.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Simon Depelchin",
+                    "email": "simon@webartisan.be",
+                    "homepage": "https://webartisan.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easy to use virtual wallet for your app",
+            "homepage": "https://github.com/mannikj/laravel-wallet",
+            "keywords": [
+                "credits",
+                "currency",
+                "depsimon",
+                "laravel-wallet",
+                "mannikj",
+                "payment",
+                "virtual",
+                "wallet"
+            ],
+            "support": {
+                "issues": "https://github.com/MannikJ/laravel-wallet/issues",
+                "source": "https://github.com/MannikJ/laravel-wallet/tree/v7.0.0"
+            },
+            "time": "2022-03-17T14:47:53+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.8.0",
             "source": {
@@ -3663,6 +3738,262 @@
                 }
             ],
             "time": "2022-11-05T23:03:38+00:00"
+        },
+        {
+            "name": "shetabit/multipay",
+            "version": "v1.23.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shetabit/multipay.git",
+                "reference": "a858f562e90d9161e9fca15ec2bff46114816bba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shetabit/multipay/zipball/a858f562e90d9161e9fca15ec2bff46114816bba",
+                "reference": "a858f562e90d9161e9fca15ec2bff46114816bba",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": ">=6.2",
+                "nesbot/carbon": "^1.39|^2.0",
+                "php": ">=7.2",
+                "ramsey/uuid": "^3.7|^3.8|^3.9|^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shetabit\\Multipay\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mahdi Khanzadi",
+                    "email": "khanzadimahdi@gmail.com",
+                    "homepage": "https://github.com/shetabit",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Payment Gateway Integration Package",
+            "homepage": "https://github.com/shetabit/multipay",
+            "keywords": [
+                "Bank",
+                "Meli",
+                "Payline",
+                "gateway",
+                "iranKish payment gateway",
+                "irankish",
+                "jahanPay payment gateway",
+                "jahanpay",
+                "jibit",
+                "jibit payment gateway",
+                "meli payment gateway",
+                "mellat",
+                "mellat payment gateway",
+                "melli",
+                "parsian",
+                "parsian payment gateway",
+                "pasargad",
+                "pasargad payment gateway",
+                "pay",
+                "pay payment gateway",
+                "payline payment gateway",
+                "payment",
+                "payment gateway",
+                "paypal",
+                "paypal payment gateway",
+                "php iranKish",
+                "php iranKish package",
+                "php jahanPay",
+                "php jahanPay package",
+                "php jibit",
+                "php jibit package",
+                "php meli",
+                "php meli package",
+                "php mellat",
+                "php mellat package",
+                "php melli bank payment package",
+                "php parsian",
+                "php parsian package",
+                "php pasargad",
+                "php pasargad package",
+                "php pay",
+                "php pay package",
+                "php payline",
+                "php payline package",
+                "php payment gateway",
+                "php payment package",
+                "php paypal",
+                "php paypal package",
+                "php sadad",
+                "php sadad package",
+                "php saderat",
+                "php saderat package",
+                "php saman",
+                "php saman package",
+                "php shaparak",
+                "php shaparak package",
+                "php zarinpal",
+                "php zarinpal package",
+                "sadad",
+                "sadad payment gateway",
+                "saderat",
+                "saderat payment gateway",
+                "saman",
+                "saman payment gateway",
+                "shaparak",
+                "shaparak payment gateway",
+                "shetabit",
+                "zarinpal",
+                "zarinpal payment gateway"
+            ],
+            "support": {
+                "issues": "https://github.com/shetabit/multipay/issues",
+                "source": "https://github.com/shetabit/multipay/tree/v1.23.0"
+            },
+            "time": "2023-01-07T11:37:25+00:00"
+        },
+        {
+            "name": "shetabit/payment",
+            "version": "v4.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shetabit/payment.git",
+                "reference": "8d808e22fa8ce6a60e4039db6b8147c3ba47977a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shetabit/payment/zipball/8d808e22fa8ce6a60e4039db6b8147c3ba47977a",
+                "reference": "8d808e22fa8ce6a60e4039db6b8147c3ba47977a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/broadcasting": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "php": ">=7.2",
+                "shetabit/multipay": "^1.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.0|^4.0|^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^6.0|^7.0|^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "suggest": {
+                "ext-soap": "Needed to support some drivers that required SOAP"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Shetabit\\Payment\\Provider\\PaymentServiceProvider"
+                    ],
+                    "aliases": {
+                        "Payment": "Shetabit\\Payment\\Facade\\Payment"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Shetabit\\Payment\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mahdi Khanzadi",
+                    "email": "khanzadimahdi@gmail.com",
+                    "homepage": "https://github.com/shetabit",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Payment Gateway Integration Package",
+            "homepage": "https://github.com/shetabit/payment",
+            "keywords": [
+                "Bank",
+                "Meli",
+                "Payline",
+                "gateway",
+                "iranKish payment gateway",
+                "irankish",
+                "jahanPay payment gateway",
+                "jahanpay",
+                "jibit",
+                "jibit payment gateway",
+                "laravel iranKish",
+                "laravel iranKish package",
+                "laravel jahanPay",
+                "laravel jahanPay package",
+                "laravel jibit",
+                "laravel jibit package",
+                "laravel meli",
+                "laravel meli package",
+                "laravel mellat",
+                "laravel mellat package",
+                "laravel melli bank payment package",
+                "laravel parsian",
+                "laravel parsian package",
+                "laravel pasargad",
+                "laravel pasargad package",
+                "laravel pay",
+                "laravel pay package",
+                "laravel payline",
+                "laravel payline package",
+                "laravel payment gateway",
+                "laravel payment package",
+                "laravel paypal",
+                "laravel paypal package",
+                "laravel sadad",
+                "laravel sadad package",
+                "laravel saderat",
+                "laravel saderat package",
+                "laravel saman",
+                "laravel saman package",
+                "laravel shaparak",
+                "laravel shaparak package",
+                "laravel zarinpal",
+                "laravel zarinpal package",
+                "meli payment gateway",
+                "mellat",
+                "mellat payment gateway",
+                "melli",
+                "parsian",
+                "parsian payment gateway",
+                "pasargad",
+                "pasargad payment gateway",
+                "pay",
+                "pay payment gateway",
+                "payline payment gateway",
+                "payment",
+                "payment gateway",
+                "paypal",
+                "paypal payment gateway",
+                "sadad",
+                "sadad payment gateway",
+                "saderat",
+                "saderat payment gateway",
+                "saman",
+                "saman payment gateway",
+                "shaparak",
+                "shaparak payment gateway",
+                "shetabit",
+                "zarinpal",
+                "zarinpal payment gateway"
+            ],
+            "support": {
+                "issues": "https://github.com/shetabit/payment/issues",
+                "source": "https://github.com/shetabit/payment/tree/v4.3.1"
+            },
+            "time": "2022-10-05T17:42:24+00:00"
         },
         {
             "name": "spatie/eloquent-sortable",

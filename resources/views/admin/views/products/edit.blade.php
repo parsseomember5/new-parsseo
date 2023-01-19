@@ -132,7 +132,7 @@
                         {{-- Script --}}
                         <div class="mb-3 col-12">
                             <label class="form-label" for="script">جاواسکریپت اضافی</label>
-                            <textarea class="form-control" id="script" name="script"  cols="30" rows="10">{{old('script', $product->script)}}</textarea>
+                            <textarea class="form-control" id="script" name="script" rows="2">{{old('script', $product->script)}}</textarea>
                         </div>
 
                         {{-- image --}}
@@ -140,18 +140,54 @@
                             <label for="image" class="form-label">تصویر اصلی محصول</label>
                             <input class="form-control" type="file" id="image" name="image">
                         </div>
+                        @if($product->image)
+                            <div class="col-lg-3 mb-3">
+                                <input type="hidden" id="remove_image" name="remove_image">
+                                <div class="pt-4">
+                                    <a href="{{$product->getImage()}}" target="_blank">
+                                        <img src="{{$product->getImage('thumb')}}" alt="image" class="w-px-40 h-auto rounded" id="post-image">
+                                    </a>
+                                    <span class="btn btn-sm btn-danger remove-image-file" data-url="{{$product->image['original']}}"
+                                          input-id="remove_image" image-id="post-image"><i class="bx bx-trash"></i></span>
+                                </div>
+                            </div>
+                        @endif
 
                         {{-- cover --}}
                         <div class="mb-3 col-lg-6">
                             <label for="cover" class="form-label">کاور ویدئو معرفی</label>
                             <input class="form-control" type="file" id="cover" name="cover" accept="image/*">
                         </div>
+                        @if($product->cover)
+                            <div class="col-lg-3 mb-3">
+                                <input type="hidden" id="remove_image" name="remove_image">
+                                <div class="pt-4">
+                                    <a href="{{$product->getCover()}}" target="_blank">
+                                        <img src="{{$product->getCover()}}" alt="image" class="w-px-40 h-auto rounded" id="post-image">
+                                    </a>
+                                    <span class="btn btn-sm btn-danger remove-image-file" data-url="{{$product->getCover()}}"
+                                          input-id="remove_image" image-id="post-image"><i class="bx bx-trash"></i></span>
+                                </div>
+                            </div>
+                        @endif
 
                         {{-- headlines_pdf --}}
                         <div class="mb-3 col-lg-6">
                             <label for="headlines_pdf" class="form-label">فایل سرفصل ها</label>
                             <input class="form-control" type="file" id="headlines_pdf" name="headlines_pdf" accept="">
                         </div>
+                        @if($product->headlines_pdf)
+                            <div class="col-lg-3 mb-3">
+                                <input type="hidden" id="remove_image" name="remove_image">
+                                <div class="pt-4">
+                                    <a href="{{$product->getHeadlinesPDF()}}" target="_blank">
+                                        <img src="{{$product->getHeadlinesPDF()}}" alt="image" class="w-px-40 h-auto rounded" id="post-image">
+                                    </a>
+                                    <span class="btn btn-sm btn-danger remove-image-file" data-url="{{$product->getHeadlinesPDF()}}"
+                                          input-id="remove_image" image-id="post-image"><i class="bx bx-trash"></i></span>
+                                </div>
+                            </div>
+                        @endif
 
 
                         {{-- body --}}
@@ -209,7 +245,7 @@
                     </div>
 
 
-                    {{-- modal --}}
+                    {{-- modal
                     <div class="mb-3">
                         <label class="form-label" for="modal_id">انتخاب مدال (اختیاری)</label>
                         <select class="select2 form-select" id="modal_id" name="modal_id" data-allow-clear="true">
@@ -217,7 +253,7 @@
                                 <option value="{{$modal->id}}" {{ $product->modal_id==$modal->id ? 'selected' : '' }}>{{$modal->title}}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div>--}}
 
                     {{-- Recommendeds --}}
                     <div class="mb-3">
@@ -404,6 +440,48 @@
                                 data-model-id="{{$product->id}}" data-model="products">
                             حذف این محصول
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">سوالات متداول</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3 col-12">
+                            <label for="faq_title" class="form-label">عنوان سوالات متداول</label>
+                            <input class="form-control" type="text" id="faq_title" name="faq_title"
+                                   value="{{old('faq_title',$product->faq_title)}}">
+                        </div>
+                        <div class="mb-3 col-12">
+                            <label for="faq_title" class="form-label">سوالات متداول</label>
+                            <div id="faq-items">
+                                @if($product->faq)
+                                    @foreach($product->faq as $item)
+                                        <?php $itemName = \Illuminate\Support\Str::random(6);?>
+                                        <div class='row align-items-end' id='faq_row_{{$itemName}}'>
+                                            <div class='mb-3 col-12'>
+                                                <label for="item_faq_{{$itemName}}" class="form-label">عنوان</label>
+                                                <input class="form-control text-start" type="text" id="item_faq_{{$itemName}}" name="item_faq_{{$itemName}}[]"
+                                                       value="{{old('item_faq_' . $itemName,$item[0])}}">
+                                            </div>
+
+                                            <div class='mb-3 col-12'>
+                                                <label for="item_faq_{{$itemName}}" class="form-label">متن</label>
+                                                <textarea class="form-control text-start" type="text" id="item_faq_{{$itemName}}" name="item_faq_{{$itemName}}[]">{{old('item_faq_' . $itemName,$item[1])}}</textarea>
+                                            </div>
+
+                                            <div class='mb-3 col-lg-2'>
+                                                <span class='btn btn-label-danger btn-remove-faq' data-delete='faq_row_{{$itemName}}'><i class='bx bx-trash'></i></span>
+                                            </div>
+
+                                            <div class='col-12'><hr></div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <span class="btn btn-primary add-more-faq"><i class="bx bx-plus"></i> افزودن آیتم</span>
+                        </div>
                     </div>
                 </div>
             </div>

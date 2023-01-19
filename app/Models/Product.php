@@ -6,9 +6,7 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -22,7 +20,8 @@ class Product extends Model implements Viewable
     protected $guarded           = [];
     protected $casts             = [
         'image' => 'array',
-        'child' => 'array'
+        'child' => 'array',
+        'faq' => 'array'
     ];
 
     const TYPE  = [
@@ -93,12 +92,12 @@ class Product extends Model implements Viewable
     /*public function supports()
     {
         return $this->hasMany(Support::class);
-    }
+    }*/
 
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status', true);
-    }*/
+    }
 
     public function modal()
     {
@@ -120,22 +119,10 @@ class Product extends Model implements Viewable
         return $this->belongsToMany(Product::class, 'product_recommended', 'product_id', 'recommended_id');
     }
 
-    /*public function factorItems()
-    {
-        return $this->hasMany(Factoritem::class);
-    }
-
-    public function successFactorItems()
-    {
-        return $this->hasMany(Factoritem::class)->whereHas('factor', function(Builder $query) {
-            $query->where('status', true)->groupBy('user_id');
-        });
-    }
-
     public function learnings()
     {
         return $this->hasMany(Learning::class);
-    }*/
+    }
 
     public function getImage($size = 'original'){
 
@@ -143,6 +130,14 @@ class Product extends Model implements Viewable
             return asset('images/default.jpg');
         }
         return '/storage'.$this->image[$size];
+    }
+
+    public function getCover(){
+        return '/storage'.$this->cover;
+    }
+
+    public function getHeadlinesPDF(){
+        return '/storage'.$this->headlines_pdf;
     }
 
     public static function getLevels($level = null)

@@ -53,6 +53,7 @@ class UpdateProductRequest extends FormRequest
             'child.*' => 'nullable|numeric',
             'recommendeds.*' => 'nullable|numeric',
             'tags.*' => 'nullable|numeric',
+            'faq_title' => 'nullable|string|max:255',
         ];
     }
 }
