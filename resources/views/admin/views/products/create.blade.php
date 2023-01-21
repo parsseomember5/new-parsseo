@@ -99,6 +99,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-4">
             {{-- price --}}
             <div class="card mb-4">
@@ -233,7 +234,6 @@
                                 @endforeach
                             </select>
                         </div>
-
                     </div>
 
 

@@ -18,6 +18,7 @@ use App\Models\LandingContactUs;
 use App\Models\LandingSeo;
 use App\Models\LandingWebdesign;
 use App\Models\PortfoliosSetting;
+use App\Models\SmsSetting;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -31,6 +32,11 @@ class SettingsController extends Controller
     public function gateways(){
         $settings = GatewaySetting::first();
         return view('admin.views.settings.gateways',compact('settings'));
+    }
+
+    public function sms(){
+        $settings = SmsSetting::first();
+        return view('admin.views.settings.sms',compact('settings'));
     }
 
     public function hero(){
@@ -555,5 +561,15 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
+    public function updateSMS(Request $request){
+        $request->validate([
+            'default'  =>  'required',
+            'kavenegar_token' => 'nullable|string|max:190',
+            'kavenegar_pattern' => 'nullable|string|max:190',
+        ]);
 
+        SmsSetting::first()->update($request->all());
+        session()->flash('success','تغییرات با موفقیت ذخیره شد.');
+        return redirect()->back();
+    }
 }

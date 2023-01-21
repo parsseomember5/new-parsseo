@@ -215,6 +215,8 @@ Route::prefix('admin')->group(function (){
             Route::post('general/update',[SettingsController::class,'updateGeneral'])->name('settings.general_update');
             Route::get('gateways',[SettingsController::class,'gateways'])->name('settings.gateways');
             Route::post('gateways/update',[SettingsController::class,'updateGateways'])->name('settings.gateways_update');
+            Route::get('sms',[SettingsController::class,'sms'])->name('settings.sms');
+            Route::post('sms/update',[SettingsController::class,'updateSMS'])->name('settings.sms_update');
             Route::get('portfolios',[SettingsController::class,'portfolios'])->name('settings.portfolios');
             Route::post('portfolios/update',[SettingsController::class,'updatePortfolios'])->name('settings.portfolios_update');
             Route::get('features',[SettingsController::class,'features'])->name('settings.features');
@@ -235,13 +237,6 @@ Route::prefix('admin')->group(function (){
             Route::post('contact-us/update',[SettingsController::class,'updateContactUs'])->name('settings.contact_us_update');
             Route::get('about-us',[SettingsController::class,'aboutUs'])->name('settings.about_us');
             Route::post('about-us/update',[SettingsController::class,'updateAboutUs'])->name('settings.about_us_update');
-
-            Route::get('seo',[SettingsController::class,'seo'])->name('settings.seo');
-            Route::post('seo/update',[SettingsController::class,'updateSeo'])->name('settings.seo_update');
-            Route::get('webdesign',[SettingsController::class,'webDesign'])->name('settings.webdesign');
-            Route::post('webdesign/update',[SettingsController::class,'webDesignUpdate'])->name('settings.webdesign_update');
-            Route::get('appdesign',[SettingsController::class,'appDesign'])->name('settings.appdesign');
-            Route::post('appdesign/update',[SettingsController::class,'appDesignUpdate'])->name('settings.appdesign_update');
         });
 
         // feedbacks

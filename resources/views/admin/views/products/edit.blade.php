@@ -25,65 +25,60 @@
                             <input type="text" class="form-control" id="title" name="title" value="{{old('title', $product->title)}}">
                         </div>
 
-                        {{-- slug --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="slug">نامک</label>
-                            <input type="text" class="form-control" id="slug" name="slug" value="{{old('slug', $product->slug)}}">
-                        </div>
-
                         {{-- Spotplayer Course Id --}}
                         <div class="mb-3 col-lg-6">
                             <label class="form-label" for="spotplayer_course_id">آی‌دی دوره در اسپات‌پلیر (اختیاری)</label>
                             <input type="text" class="form-control" id="spotplayer_course_id" name="spotplayer_course_id" value="{{old('spotplayer_course_id', $product->spotplayer_course_id)}}">
                         </div>
 
-                        {{-- H1 --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="h1">عنوان H1</label>
-                            <input type="text" class="form-control" id="h1" name="h1" value="{{old('h1', $product->h1)}}">
+                        {{-- Kind --}}
+                        <div class="mb-3 col-lg-3">
+                            <label class="form-label" for="kind">نوع محصول</label>
+                            <select class="form-select" id="kind" name="kind" data-allow-clear="true">
+                                @foreach(\App\Models\Product::KIND as $key => $item)
+                                    <option value="{{ $key }}" {{ $key==$product->kind ? 'selected' : '' }}>{{ $item }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        {{-- H2 --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="h2">عنوان H2</label>
-                            <input type="text" class="form-control" id="h2" name="h2" value="{{old('h2', $product->h2)}}">
+                        {{-- State --}}
+                        <div class="mb-3 col-lg-3">
+                            <label class="form-label" for="state">وضعیت برگزاری</label>
+                            <select class="form-select" id="state" name="state" data-allow-clear="true">
+                                @foreach(\App\Models\Product::STATE as $key => $item)
+                                    <option value="{{ $key }}" {{ $key==$product->state ? 'selected' : '' }}>{{ $item }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        {{-- H3 --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="h3">عنوان H3</label>
-                            <input type="text" class="form-control" id="h3" name="h3" value="{{old('h3', $product->h3)}}">
-                        </div>
-
-                        {{-- Teacher --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="admin_id">صاحب اثر (مدرس)</label>
-                            <select class="form-select select2 select2-show-search" id="admin_id" name="admin_id" data-allow-clear="true" required>
+                        {{-- Level --}}
+                        <div class="mb-3 col-lg-3">
+                            <label class="form-label" for="level">سطح</label>
+                            <select class="form-select" id="level" name="level" data-allow-clear="true" required>
                                 <option value="">انتخاب نمائید</option>
-                                @foreach(\App\Models\Admin::all() as $item)
-                                    <option value="{{ $item->id }}" {{ $product->admin_id == $item->id ? 'selected' : '' }}>
-                                        {{ $item->email . ' - ' . $item->name }}
-                                    </option>
+                                @foreach(\App\Models\Product::getLevels() as $levelKey => $levelValue)
+                                    <option value="{!!$levelKey!!}" {{ $product->level==$levelKey ? 'selected' : '' }}>{!!$levelValue!!}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         {{-- Time --}}
-                        <div class="mb-3 col-lg-6">
+                        <div class="mb-3 col-lg-3">
                             <label class="form-label" for="time">مدت زمان</label>
                             <input type="text" class="form-control" id="time" name="time" value="{{old('time', $product->time)}}">
                         </div>
 
-                        {{-- Price --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="price">قیمت (تومان)</label>
-                            <input type="number" class="form-control" id="price" name="price" value="{{old('price', $product->price)}}">
+                        {{-- excerpt --}}
+                        <div class="mb-3 col-12">
+                            <label class="form-label" for="excerpt">خلاصه</label>
+                            <textarea class="form-control" id="excerpt" name="excerpt" rows="2">{{old('excerpt', $product->excerpt)}}</textarea>
                         </div>
 
-                        {{-- offPrice --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="offPrice">قیمت تخفیف</label>
-                            <input type="number" class="form-control" id="offPrice" name="offPrice" value="{{old('offPrice', $product->offPrice)}}">
+                        {{-- body --}}
+                        <div class="mb-3">
+                            <input type="hidden" name="body" id="body" value="{{old('body', $product->body)}}">
+                            <label for="body" class="form-label">محتوای محصول</label>
+                            <div id="main-editor" data-input-id="body">{!! $product->body !!}</div>
                         </div>
 
                         {{-- Child --}}
@@ -104,29 +99,10 @@
                             </select>
                         </div>
 
-                        {{-- Tags --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="tags">تگ ها</label>
-                            <select class="form-select select2 select2-show-search" id="tags" multiple name="tags[]" data-allow-clear="true">
-                                @foreach(\Spatie\Tags\Tag::all() as $item)
-                                    <option value="{{ $item->id }}" {{ in_array($item->id,$product->tags->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                        {{ $item->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-
                         {{-- offPrice --}}
-                        <div class="mb-3 col-lg-12">
+                        <div class="mb-3 col-lg-6">
                             <label class="form-label" for="video">آدرس ویدئو</label>
                             <input type="text" class="form-control" id="video" name="video" value="{{old('video', $product->video)}}">
-                        </div>
-
-                        {{-- excerpt --}}
-                        <div class="mb-3 col-12">
-                            <label class="form-label" for="excerpt">خلاصه</label>
-                            <textarea class="form-control" id="excerpt" name="excerpt" rows="2">{{old('excerpt', $product->excerpt)}}</textarea>
                         </div>
 
                         {{-- Script --}}
@@ -134,9 +110,59 @@
                             <label class="form-label" for="script">جاواسکریپت اضافی</label>
                             <textarea class="form-control" id="script" name="script" rows="2">{{old('script', $product->script)}}</textarea>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        {{-- image --}}
+        <div class="col-lg-4">
+            {{-- price --}}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>قیمت گذاری</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {{-- Type --}}
                         <div class="mb-3 col-lg-6">
+                            <label class="form-label" for="type">نوع فروش</label>
+                            <select class="form-select" id="type" name="type" data-allow-clear="true">
+                                @foreach(\App\Models\Product::TYPE as $key => $item)
+                                    <option value="{{ $key }}" {{ $key==$product->type ? 'selected' : '' }}>{{ $item }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- Support --}}
+                        <div class="mb-3 col-lg-6">
+                            <label class="form-label" for="support">تعداد روز پشتبانی</label>
+                            <input type="number" class="form-control" dir="ltr" id="support" name="support" value="{{old('support', $product->support)}}">
+                        </div>
+
+                        {{-- Price --}}
+                        <div class="mb-3">
+                            <label class="form-label" for="price">قیمت (تومان)</label>
+                            <input type="number" class="form-control" id="price" name="price" value="{{old('price', $product->price)}}">
+                        </div>
+
+                        {{-- offPrice --}}
+                        <div class="mb-3">
+                            <label class="form-label" for="offPrice">قیمت تخفیف خورده (تومان)</label>
+                            <input type="number" class="form-control" id="offPrice" name="offPrice" value="{{old('offPrice', $product->offPrice)}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- files --}}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>فایل ها</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {{-- image --}}
+                        <div class="mb-3">
                             <label for="image" class="form-label">تصویر اصلی محصول</label>
                             <input class="form-control" type="file" id="image" name="image">
                         </div>
@@ -154,8 +180,8 @@
                         @endif
 
                         {{-- cover --}}
-                        <div class="mb-3 col-lg-6">
-                            <label for="cover" class="form-label">کاور ویدئو معرفی</label>
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">کاور ویدئو معرفی (اختیاری)</label>
                             <input class="form-control" type="file" id="cover" name="cover" accept="image/*">
                         </div>
                         @if($product->cover)
@@ -172,8 +198,8 @@
                         @endif
 
                         {{-- headlines_pdf --}}
-                        <div class="mb-3 col-lg-6">
-                            <label for="headlines_pdf" class="form-label">فایل سرفصل ها</label>
+                        <div class="mb-3">
+                            <label for="headlines_pdf" class="form-label">فایل سرفصل ها (اختیاری)</label>
                             <input class="form-control" type="file" id="headlines_pdf" name="headlines_pdf" accept="">
                         </div>
                         @if($product->headlines_pdf)
@@ -188,63 +214,67 @@
                                 </div>
                             </div>
                         @endif
-
-
-                        {{-- body --}}
-                        <div class="mb-3">
-                            <input type="hidden" name="body" id="body" value="{{old('body', $product->body)}}">
-                            <label for="body" class="form-label">محتوای محصول</label>
-                            <div id="main-editor" data-input-id="body">{!! $product->body !!}</div>
-                        </div>
-
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4">
+
+            {{-- seo --}}
             <div class="card mb-4">
+                <div class="card-header">
+                    <h4>سئو</h4>
+                </div>
                 <div class="card-body">
                     <div class="row">
-                        {{-- Kind --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="kind">نوع محصول</label>
-                            <select class="form-select" id="kind" name="kind" data-allow-clear="true">
-                                @foreach(\App\Models\Product::KIND as $key => $item)
-                                    <option value="{{ $key }}" {{ $key==$product->kind ? 'selected' : '' }}>{{ $item }}</option>
-                                @endforeach
-                            </select>
+                        {{-- H1 --}}
+                        <div class="mb-3">
+                            <label class="form-label" for="h1">عنوان H1</label>
+                            <input type="text" class="form-control" id="h1" name="h1" value="{{old('h1', $product->h1)}}">
                         </div>
 
-                        {{-- Type --}}
+                        {{-- canonical --}}
+                        <div class="mb-3">
+                            <label class="form-label" for="canonical">تگ canonical</label>
+                            <input type="text" class="form-control" dir="ltr" id="canonical" name="canonical" value="{{old('canonical',$product->canonical)}}">
+                        </div>
+
+                        {{-- H2 --}}
                         <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="type">نوع فروش</label>
-                            <select class="form-select" id="type" name="type" data-allow-clear="true">
-                                @foreach(\App\Models\Product::TYPE as $key => $item)
-                                    <option value="{{ $key }}" {{ $key==$product->type ? 'selected' : '' }}>{{ $item }}</option>
-                                @endforeach
-                            </select>
+                            <label class="form-label" for="h2">عنوان H2 (اختیاری)</label>
+                            <input type="text" class="form-control" id="h2" name="h2" value="{{old('h2', $product->h2)}}">
+                        </div>
+
+                        {{-- H3 --}}
+                        <div class="mb-3 col-lg-6">
+                            <label class="form-label" for="h3">عنوان H3 (اختیاری)</label>
+                            <input type="text" class="form-control" id="h3" name="h3" value="{{old('h3', $product->h3)}}">
+                        </div>
+
+                        {{-- sitemap_priority --}}
+                        <div class="mb-3 col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="sitemap_priority">اولویت در sitemap</label>
+                                <input type="number" step="0.1" min="0.5" max="1" class="form-control" dir="ltr" id="sitemap_priority"
+                                       name="sitemap_priority" value="{{old('sitemap_priority', $product->sitemap_priority)}}">
+                            </div>
+                        </div>
+
+                        {{-- slug --}}
+                        <div class="mb-3 col-lg-6">
+                            <label class="form-label" for="slug">نامک</label>
+                            <input type="text" class="form-control" id="slug" name="slug" value="{{old('slug', $product->slug)}}">
+                        </div>
+
+                        {{-- meta description --}}
+                        <div class="mb-3">
+                            <label class="form-label" for="meta_description">متای توضیحات</label>
+                            <textarea class="form-control" id="meta_description" name="meta_description" rows="2">{{old('meta_description',$product->meta_description)}}</textarea>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="row">
-                        {{-- State --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="state">وضعیت برگزاری</label>
-                            <select class="form-select" id="state" name="state" data-allow-clear="true">
-                                @foreach(\App\Models\Product::STATE as $key => $item)
-                                    <option value="{{ $key }}" {{ $key==$product->state ? 'selected' : '' }}>{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        {{-- Support --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="support">تعداد روز پشتبانی</label>
-                            <input type="number" class="form-control" dir="ltr" id="support" name="support" value="{{old('support', $product->support)}}">
-                        </div>
-                    </div>
-
-
+            <div class="card mb-4">
+                <div class="card-body">
                     {{-- modal
                     <div class="mb-3">
                         <label class="form-label" for="modal_id">انتخاب مدال (اختیاری)</label>
@@ -254,6 +284,18 @@
                             @endforeach
                         </select>
                     </div>--}}
+
+                    {{-- Tags --}}
+                    <div class="mb-3">
+                        <label class="form-label" for="tags">تگ ها</label>
+                        <select class="form-select select2 select2-show-search" id="tags" multiple name="tags[]" data-allow-clear="true">
+                            @foreach(\Spatie\Tags\Tag::all() as $item)
+                                <option value="{{ $item->id }}" {{ in_array($item->id,$product->tags->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     {{-- Recommendeds --}}
                     <div class="mb-3">
@@ -285,8 +327,8 @@
                         </select>
                     </div>
 
-                    <div class="row">
-                        {{-- locale --}}
+                    {{--<div class="row">
+                        --}}{{-- locale --}}{{--
                         <div class="mb-3 col-lg-6">
                             <label class="form-label" for="locale">زبان مقاله</label>
                             <select class="form-select" id="locale" name="locale" data-allow-clear="true">
@@ -294,7 +336,7 @@
                                 <option value="en" {{ $product->locale == 'en' ? 'selected' : '' }}>انگلیسی (EN)</option>
                             </select>
                         </div>
-                        {{-- translation --}}
+                        --}}{{-- translation --}}{{--
                         <div class="mb-3 col-lg-6">
                             <label class="form-label" for="translation_id">انتخاب ترجمه</label>
                             <select class="select2 form-select" id="translation_id" name="translation_id" data-allow-clear="true">
@@ -304,19 +346,8 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div>--}}
 
-                    {{-- meta description --}}
-                    <div class="mb-3">
-                        <label class="form-label" for="meta_description">متای توضیحات</label>
-                        <textarea class="form-control" id="meta_description" name="meta_description" rows="2">{{old('meta_description',$product->meta_description)}}</textarea>
-                    </div>
-
-                    {{-- canonical --}}
-                    <div class="mb-3">
-                        <label class="form-label" for="canonical">تگ canonical</label>
-                        <input type="text" class="form-control" dir="ltr" id="canonical" name="canonical" value="{{old('canonical',$product->canonical)}}">
-                    </div>
 
                     {{-- author --}}
                     <div class="mb-3">
@@ -324,6 +355,19 @@
                         <select class="select2 form-select" id="author_id" name="author_id" data-allow-clear="true">
                             @foreach(\App\Models\Admin::all() as $admin)
                                 <option value="{{$admin->id}}" {{ $product->author_id == $admin->id ? 'selected' : '' }}>{{$admin->name . ' (' .$admin->email. ')'}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{-- Teacher --}}
+                    <div class="mb-3">
+                        <label class="form-label" for="admin_id">صاحب اثر (مدرس)</label>
+                        <select class="form-select select2 select2-show-search" id="admin_id" name="admin_id" data-allow-clear="true" required>
+                            <option value="">انتخاب نمائید</option>
+                            @foreach(\App\Models\Admin::all() as $item)
+                                <option value="{{ $item->id }}" {{ $product->admin_id == $item->id ? 'selected' : '' }}>
+                                    {{ $item->email . ' - ' . $item->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -337,14 +381,7 @@
                             </div>
                         </div>
 
-                        {{-- sitemap_priority --}}
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label" for="sitemap_priority">اولویت در sitemap</label>
-                                <input type="number" step="0.1" min="0.5" max="1" class="form-control" dir="ltr" id="sitemap_priority"
-                                       name="sitemap_priority" value="{{old('sitemap_priority', $product->sitemap_priority)}}">
-                            </div>
-                        </div>
+
 
                         {{-- status --}}
                         <div class="col-lg-6">
@@ -356,17 +393,6 @@
                                     <option value="pending" {{ $product->status == 'pending' ? 'selected' : '' }}>در انتظار تایید</option>
                                 </select>
                             </div>
-                        </div>
-
-                        {{-- Level --}}
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label" for="level">سطح</label>
-                            <select class="form-select" id="level" name="level" data-allow-clear="true" required>
-                                <option value="">انتخاب نمائید</option>
-                                @foreach(\App\Models\Product::getLevels() as $levelKey => $levelValue)
-                                    <option value="{!!$levelKey!!}" {{ $product->level==$levelKey ? 'selected' : '' }}>{!!$levelValue!!}</option>
-                                @endforeach
-                            </select>
                         </div>
 
                         {{-- isSpecial --}}

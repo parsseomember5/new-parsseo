@@ -10,6 +10,10 @@
             درگاه پرداخت</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {{$currentRoute == "settings.sms" ? 'active' :''}}" href="{{route('settings.sms')}}"><i class="bx bx-cog me-1"></i>
+            سامانه پیامکی</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{$currentRoute == "settings.hero" ? 'active' :''}}" href="{{route('settings.hero')}}"><i class="bx bx-layout me-1"></i> هیرو</a>
     </li>
     <li class="nav-item">
