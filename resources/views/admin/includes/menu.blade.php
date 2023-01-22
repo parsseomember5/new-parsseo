@@ -313,68 +313,6 @@
             </ul>
         </li>
 
-        {{-- portfolios --}}
-        <li class="menu-item {{str_starts_with($currentRoute,'portfolios') ? 'active' :''}}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-box"></i>
-                <div data-i18n="Users">نمونه‌کار ها</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{$currentRoute == "portfolios.index" ? 'active' :''}}">
-                    <a href="{{route('portfolios.index')}}" class="menu-link">
-                        <div data-i18n="List">مشاهده همه</div>
-                    </a>
-                </li>
-                <li class="menu-item {{$currentRoute == "portfolios.trash" ? 'active' :''}}">
-                    <a href="{{route('portfolios.trash')}}" class="menu-link">
-                        <div data-i18n="List">زباله‌دان</div>
-                    </a>
-                </li>
-                <li class="menu-item {{$currentRoute == "portfolios.create" ? 'active' :''}}">
-                    <a href="{{route('portfolios.create')}}" class="menu-link">
-                        <div data-i18n="List">افزودن مورد جدید</div>
-                    </a>
-                </li>
-                <li class="menu-item {{str_starts_with($currentRoute,"portfolio-categories") ? 'active' :''}}">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <div data-i18n="View">دسته بندی نمونه‌کار ها</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item {{$currentRoute == "portfolio-categories.index" ? 'active' :''}}">
-                            <a href="{{route('portfolio-categories.index')}}" class="menu-link">
-                                <div data-i18n="Account">مشاهده همه</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{$currentRoute == "portfolio-categories.create" ? 'active' :''}}">
-                            <a href="{{route('portfolio-categories.create')}}" class="menu-link">
-                                <div data-i18n="Security">افزودن مورد جدید</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        {{-- logos --}}
-        <li class="menu-item {{str_starts_with($currentRoute,'logos.') ? 'active' :''}}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-image"></i>
-                <div data-i18n="Invoice">لوگوی مشتریان</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{$currentRoute == "logos.index" ? 'active' :''}}">
-                    <a href="{{route('logos.index')}}" class="menu-link">
-                        <div data-i18n="List">مشاهده همه</div>
-                    </a>
-                </li>
-                <li class="menu-item {{$currentRoute == "logos.create" ? 'active' :''}}">
-                    <a href="{{route('logos.create')}}" class="menu-link">
-                        <div data-i18n="Preview">افزودن مورد جدید</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
         {{-- pages --}}
         <li class="menu-item {{str_starts_with($currentRoute,'pages.') ? 'active' :''}}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -476,24 +414,9 @@
                         <div data-i18n="List">درگاه پرداخت</div>
                     </a>
                 </li>
-                <li class="menu-item {{$currentRoute == "settings.hero" ? 'active' :''}}">
-                    <a href="{{route('settings.hero')}}" class="menu-link">
-                        <div data-i18n="Preview">هیرو</div>
-                    </a>
-                </li>
                 <li class="menu-item {{$currentRoute == "settings.about" ? 'active' :''}}">
                     <a href="{{route('settings.about')}}" class="menu-link">
                         <div data-i18n="Preview">درباره ما</div>
-                    </a>
-                </li>
-                <li class="menu-item {{$currentRoute == "settings.portfolios" ? 'active' :''}}">
-                    <a href="{{route('settings.portfolios')}}" class="menu-link">
-                        <div data-i18n="Preview">نمونه کار ها</div>
-                    </a>
-                </li>
-                <li class="menu-item {{$currentRoute == "settings.features" ? 'active' :''}}">
-                    <a href="{{route('settings.features')}}" class="menu-link">
-                        <div data-i18n="Preview">ویژگی ها</div>
                     </a>
                 </li>
                 <li class="menu-item {{$currentRoute == "settings.articles" ? 'active' :''}}">
@@ -504,11 +427,6 @@
                 <li class="menu-item {{$currentRoute == "settings.feedbacks" ? 'active' :''}}">
                     <a href="{{route('settings.feedbacks')}}" class="menu-link">
                         <div data-i18n="Preview">نظرات مشتریان</div>
-                    </a>
-                </li>
-                <li class="menu-item {{$currentRoute == "settings.events" ? 'active' :''}}">
-                    <a href="{{route('settings.events')}}" class="menu-link">
-                        <div data-i18n="Preview">رویداد ها</div>
                     </a>
                 </li>
                 <li class="menu-item {{$currentRoute == "settings.counters" ? 'active' :''}}">
